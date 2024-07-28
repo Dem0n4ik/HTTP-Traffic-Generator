@@ -23,7 +23,7 @@ type RequestResult struct {
 
 func makeRequest(ctx context.Context, client *http.Client, method string, url string, body string, headers map[string]string, wg *sync.WaitGroup, semaphore chan struct{}, results chan<- RequestResult, stats *Statistics, logFile *os.File) {
     defer wg.Done()
-    defer func() { <-semaphore }() // Release the semaphore
+    defer func() { <-semaphore }()
 
     var req *http.Request
     var err error
@@ -175,7 +175,7 @@ func main() {
 
     wg.Add(*numRequests)
     for i := 0; i < *numRequests; i++ {
-        semaphore <- struct{}{} // Acquire semaphore
+        semaphore <- struct{}{}
         ctx, cancel := context.WithTimeout(context.Background(), time.Duration(*timeout)*time.Second)
         defer cancel()
         go makeRequest(ctx, client, *method, *url, *body, headers, &wg, semaphore, results, stats, errorFileHandle)
