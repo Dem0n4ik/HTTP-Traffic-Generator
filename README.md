@@ -18,7 +18,7 @@ This is a Golang-based HTTP client application designed to perform multiple HTTP
 2. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/http-traffic-generator.git
+   git clone https://github.com/Dem0n4ik/http-traffic-generator.git
    cd http-traffic-generator
    ```
 
